@@ -14,9 +14,11 @@ namespace ProductPackagerApp.Ioc
         {
             var container = new WindsorContainer();
 
-            container.Register(Component.For<IWindsorContainer>().Instance(container));
-            container.Register(Component.For<Packager>());
-            container.Register(Component.For<ConsoleInterface>());
+            container.Register(
+                Component.For<IWindsorContainer>().Instance(container),
+                Component.For<Packager>(),
+                Component.For<ConsoleInterface>()
+            );
 
             RegisterPackAlgorithms(container);
             RegisterProducts(container);
@@ -39,24 +41,17 @@ namespace ProductPackagerApp.Ioc
                 Component.For<IProduct>()
                     .ImplementedBy<LiquidProduct>()
                     .LifestyleTransient()
-                    .Named(ElementNames.Liquid)
-                    .DependsOn(Dependency.OnComponent<IPackAlghorithm, LiquidPackAlghorithm>())
-                );
+                    .Named(ElementNames.Liquid),
 
-            container.Register(
                 Component.For<IProduct>()
                     .ImplementedBy<DryProduct>()
                     .LifestyleTransient()
-                    .Named(ElementNames.Dry)
-                    .DependsOn(Dependency.OnComponent<IPackAlghorithm, DryPackAlghorithm>())
-            );
+                    .Named(ElementNames.Dry),
 
-            container.Register(
                 Component.For<IProduct>()
                     .ImplementedBy<SoftProduct>()
                     .LifestyleTransient()
                     .Named(ElementNames.Soft)
-                    .DependsOn(Dependency.OnComponent<IPackAlghorithm, SoftPackAlghorithm>())
             );
         }
 
@@ -65,12 +60,12 @@ namespace ProductPackagerApp.Ioc
             container.Register(
                 Component.For<ILogger>()
                     .ImplementedBy<ScreenLogger>()
-                    .Named(ElementNames.ScreenLogger));
+                    .Named(ElementNames.ScreenLogger),
 
-            container.Register(
                 Component.For<ILogger>()
                     .ImplementedBy<FileLogger>()
-                    .Named(ElementNames.FileLogger));
+                    .Named(ElementNames.FileLogger)
+            );
         }
     }
 }

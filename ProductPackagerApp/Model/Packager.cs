@@ -7,10 +7,8 @@ using ProductPackagerApp.Model.Products;
 namespace ProductPackagerApp.model
 {
     /* Вместо традиционного решения с фабриками, сделал вариант с IoC-контейнером
-     * В данном случае, даже продукт не знает какой алгоритм упаковки ему назначен. 
-     * Т.е. это немного противоречит предисловию задачи из-за того, что получается немного проще
-     * применить неправильный алгоритм упаковки, но зато все алгоритмы и зависимости 
-     * находятся в одном месте и их проще редактировать, не обращаясь к конкретным классам
+     * Т.е. получается, что какой алгоритм упаковки запросит продукт, такой и будет подтянут,
+     * что соответсвует предсиловию задачи - применить неправильный алгоритм упаковки стало невозможно.
      * Алгоритмы и логеры создаются один раз, продукты каждый раз.
      */
 
@@ -22,7 +20,6 @@ namespace ProductPackagerApp.model
         {
             _container = container;
             Inform = informDelegate;
-
         }
 
         public void Pack(char productType, char loggerType)
@@ -38,7 +35,6 @@ namespace ProductPackagerApp.model
             {                
                 InformFail(e.Message);
             }
-         
         }
 
         private void InformFail(string message)
@@ -50,6 +46,5 @@ namespace ProductPackagerApp.model
         {
             Inform("Упаковка успешна", ConsoleColor.Green);          
         }
-
     }
 }

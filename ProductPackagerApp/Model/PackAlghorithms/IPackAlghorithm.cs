@@ -4,6 +4,6 @@ namespace ProductPackagerApp.Model.PackAlghorithms
 {
     public interface IPackAlghorithm
     {
-        void WriteToLog(ILogger logger);        
+        void Execute(ILogger logger);        
     }
 }

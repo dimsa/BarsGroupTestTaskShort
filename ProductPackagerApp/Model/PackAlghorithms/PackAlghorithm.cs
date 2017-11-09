@@ -7,7 +7,7 @@ namespace ProductPackagerApp.Model.PackAlghorithms
     public abstract class PackAlghorithm : IPackAlghorithm
     {
         protected abstract List<IPackStep> PackSteps { get; }
-        public void WriteToLog(ILogger logger)
+        public void Execute(ILogger logger)
         {
             foreach (var packStep in PackSteps)
             {

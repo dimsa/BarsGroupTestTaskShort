@@ -3,17 +3,11 @@ using ProductPackagerApp.Model.PackAlghorithms;
 
 namespace ProductPackagerApp.Model.Products
 {
-    public class LiquidProduct : IProduct
+    public class LiquidProduct : Product
     {
-        private readonly IPackAlghorithm _packAlg;
+        public LiquidProduct(LiquidPackAlghorithm packAlg) : base(packAlg)
+        {
 
-        public LiquidProduct(IPackAlghorithm packAlg)
-        {
-            _packAlg = packAlg;
-        }
-        public void Pack(ILogger logger)
-        {
-            _packAlg.WriteToLog(logger);        
         }
     }
 }

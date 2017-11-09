@@ -3,7 +3,8 @@ using ProductPackagerApp.Model.PackAlghorithms;
 
 namespace ProductPackagerApp.Model.Products
 {
-    public class Product : IProduct
+    /* Базовый продукт ничего не знает об алгоритме упаковки, кроме того, что он есть */
+    public abstract class Product : IProduct
     {
         public Product(IPackAlghorithm packAlg)
         {
@@ -14,7 +15,7 @@ namespace ProductPackagerApp.Model.Products
 
         public void Pack(ILogger logger)
         {
-            PackAlg.WriteToLog(logger);
+            PackAlg.Execute(logger);
         }
     }
 }
